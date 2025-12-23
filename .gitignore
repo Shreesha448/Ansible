@@ -1,0 +1,24 @@
+activate.sh.txt
+amiid.txt.txt
+ansible.cfg
+ansible.cfg.txt
+EC2.py
+dependency.yaml
+inventory
+start_vm.sh
+stop_vm.sh
+VM_info.txt
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+
+# Ansible / Keys
+*key*
+*.pem
+*.ppk
+
+# OS
+.DS_Store
+Thumbs.db

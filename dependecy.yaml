@@ -1,0 +1,77 @@
+- name: Install dependencies
+  hosts: UbuntuInstance
+  become: yes
+
+  vars:
+    backend_path: /var/www/backend
+
+  tasks:
+    - name: Ensure backend directory exists
+      file:
+        path: "{{ backend_path }}"
+        state: directory
+        mode: "0755"
+    
+    - name: Install pm2 Globally
+      community.general.npm: 
+        name: pm2
+        global: yes
+        state: present
+
+################################################
+# Backend Dependencies
+################################################
+
+    - name: Install cors
+      community.general.npm:
+        name: cors
+        state: present
+        path: "{{ backend_path }}"
+      
+    - name: Install express
+      community.general.npm:
+        name: express
+        state: present
+        path: "{{ backend_path }}"
+      
+    - name: Install mongoose
+      community.general.npm: 
+        name: mongoose
+        state: present
+        path: "{{ backend_path }}"
+
+    - name: Install dotenv
+      community.general.npm:
+        name: dotenv
+        state: present
+        path: "{{ backend_path }}"
+
+    - name: Install nodemon
+      community.general.npm:
+        name: nodemon
+        state: present
+        path: "{{ backend_path }}"
+    
+    - name: Install jsonwebtoken
+      community.general.npm:
+        name: jsonwebtoken
+        state: present
+        path: "{{ backend_path }}"
+
+    - name: Install bcryptjs
+      community.general.npm:
+        name: bcryptjs
+        state: present
+        path: "{{ backend_path }}"
+
+    - name: Install mongodb
+      community.general.npm:
+        name: mongodb
+        state: present
+        path: "{{ backend_path }}"
+
+    - name: Start backend using PM2
+      shell: pm2 start server.js --name passop
+      args:
+        chdir: "{{ backend_path }}"
+

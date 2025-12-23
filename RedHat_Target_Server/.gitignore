@@ -1,0 +1,4 @@
+KeyPair.tf
+terraform.tfstate
+terraform.tfstate.backup
+redhat-targetinfo2.txt

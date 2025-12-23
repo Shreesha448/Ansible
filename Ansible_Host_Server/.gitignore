@@ -1,0 +1,6 @@
+KeyPair.tf
+KeyPair.tfstate
+KeyPair.tfstate.backup
+ansible-key
+ansible-key.pub
+ansible_HostServerinfo.txt

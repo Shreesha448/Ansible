@@ -1,0 +1,80 @@
+---
+# =========================================================
+# FRONTEND SETUP — REDHAT (Node + npm + Vite)
+# =========================================================
+- name: Frontend Setup (RedHat)
+  hosts: RedHatInstance
+  become: yes
+
+  tasks:
+
+    - name: Install Node.js
+      yum:
+        name: nodejs
+        state: present
+
+    - name: Install npm
+      yum:
+        name: npm
+        state: present
+
+    - name: Install Vite globally
+      npm:
+        name: vite
+        global: yes
+        state: present
+
+
+# =========================================================
+# BACKEND SETUP — UBUNTU (Node + npm + Nodemon)
+# =========================================================
+- name: Backend Setup (Ubuntu)
+  hosts: UbuntuInstance
+  become: yes
+
+  tasks:
+
+    - name: Install Node.js and npm
+      apt:
+        name:
+          - nodejs
+          - npm
+        state: present
+        update_cache: yes
+
+    - name: Install Nodemon globally
+      npm:
+        name: nodemon
+        global: yes
+        state: present
+
+
+# =========================================================
+# DATABASE SETUP — UBUNTU (MongoDB 6.0)
+# =========================================================
+- name: Database Setup (MongoDB on Amazon Linux 2023)
+  hosts: DBInstance
+  become: yes
+
+  tasks:
+    - name: Add MongoDB repository
+      copy:
+        dest: /etc/yum.repos.d/mongodb-org-6.0.repo
+        content: |
+          [mongodb-org-6.0]
+          name=MongoDB Repository
+          baseurl=https://repo.mongodb.org/yum/amazon/2023/mongodb-org/6.0/x86_64/
+          gpgcheck=1
+          enabled=1
+          gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc
+
+    - name: Install MongoDB
+      dnf:
+        name: mongodb-org
+        state: present
+
+    - name: Enable and start MongoDB
+      systemd:
+        name: mongod
+        enabled: yes
+        state: started

@@ -1,0 +1,6 @@
+RedHat Target 2 Information
+----------------------------
+Instance ID : i-034d52fb873e0df15
+Public IP   : 44.220.135.62
+Private IP  : 172.31.31.43
+SG ID       : sg-011c76f107a087313

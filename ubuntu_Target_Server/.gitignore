@@ -1,0 +1,6 @@
+KeyPair.tf
+terraform.tfstate
+terraform.tfstate.backup
+targetinfo.txt
+ubuntu-target-key
+ubuntu-target-key.pub
